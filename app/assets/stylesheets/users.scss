@@ -1,0 +1,25 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.content {
+  .content-form--new-user-form {
+    width: 400px;
+    margin: 20px auto 0;
+
+    .content-form-field-wrap {
+      margin-bottom: 10px; 
+      
+      label {
+        display: block;
+        font-size: 14px;
+        font-weight: bolder;
+      }
+
+      input {
+        width: 100%;
+        border-radius: 2px;
+      }
+    }
+  }
+}

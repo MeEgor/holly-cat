@@ -1,0 +1,25 @@
+<h1 class="content-header">Wellcome new user!</h1>
+
+<%= form_for @user, html: { class: "content-form content-form--new-user-form" }  do |f| %>
+  
+  <%= render partial: "shared/form_errors", locals: { resource: @user } %>
+
+  <div class="content-form-field-wrap">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="content-form-field-wrap">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+
+  <div class="content-form-field-wrap">
+    <%= f.label :password_confirmation, "Confirmation" %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <div class="content-form-field-wrap">
+    <%= f.submit "Show me my kitty" %>
+  </div>
+<% end %>

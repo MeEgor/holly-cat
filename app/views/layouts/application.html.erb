@@ -12,6 +12,12 @@
       <div class="alert alert-<%= key %>"><%= value %></div>
     <% end %>
 
+    <% if current_user %>
+      <div class="user">
+        <%= current_user.email %> : <%= link_to "sign out!", signout_path, method: :delete, id: 'sign-out' %>
+      </div>
+    <% end %>
+
     <%= yield %>
   </div>
 </body>

@@ -1,0 +1,20 @@
+<h1 class="content-header">Sign in</h1>
+
+<%= form_for :sessions, 
+    url: sessions_path, 
+    html: { class: "content-form content-form--new-user-form" }  do |f| %>
+  
+  <div class="content-form-field-wrap">
+    <%= f.label :email %>
+    <%= f.text_field :email, value: @email %>
+  </div>
+
+  <div class="content-form-field-wrap">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+
+  <div class="content-form-field-wrap">
+    <%= f.submit "sign in" %>
+  </div>
+<% end %>

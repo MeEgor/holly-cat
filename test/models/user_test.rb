@@ -12,6 +12,7 @@ class UserTest < ActiveSupport::TestCase
     assert @user.respond_to?(:password)
     assert @user.respond_to?(:password_confirmation)
     assert @user.respond_to?(:authenticate)
+    assert @user.respond_to?(:remember_token)
   end
 
   test "valid" do
@@ -78,6 +79,11 @@ class UserTest < ActiveSupport::TestCase
     @user.save
     found_user = User.find_by_email @user.email
     assert_equal found_user, found_user.authenticate(@user.password)
+  end
+
+  test "remember token should not be blank" do
+    @user.save
+    assert_not_equal @user.remember_token, nil
   end
 
 end

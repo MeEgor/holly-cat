@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   resources :users, only: [:create]
   get 'signup' => 'users#new'
 
+  resources :sessions, only:[:create]
+  get 'signin' => 'sessions#new'
+  delete 'signout' => 'sessions#destroy'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

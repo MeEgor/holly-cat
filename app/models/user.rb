@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include SessionsHelper 
 
   has_secure_password
 
@@ -13,6 +14,10 @@ class User < ActiveRecord::Base
 
   before_save do
     self.email.downcase!
+  end
+
+  before_create do
+    self.remember_token = encrypt_token new_token
   end
 
 end

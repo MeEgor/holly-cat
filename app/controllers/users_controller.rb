@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
   def new
+    redirect_to root_path if current_user
     @user = User.new
   end
 
   def create
     @user = User.new user_params
     if @user.save
-      flash[:success] = 'Wellcome to Holly Cat site, %username!'
+      flash[:success] = "Wellcome to Holly Cat site, #{ @user.email }!"
       redirect_to root_path
     else
       render :new

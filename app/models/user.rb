@@ -18,6 +18,21 @@ class User < ActiveRecord::Base
 
   before_create do
     self.remember_token = encrypt_token new_token
+    self.confirmation_token = new_token unless self.skip_confirmation
+  end
+
+  attr_accessor :skip_confirmation
+
+  def confirmed?
+    confirmation_token.nil?
+  end
+
+  def confirm!
+    update_attribute :confirmation_token, nil
+  end
+
+  def skip_confirmation!
+    @skip_confirmation = true
   end
 
 end

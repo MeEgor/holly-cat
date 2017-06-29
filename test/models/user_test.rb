@@ -13,6 +13,10 @@ class UserTest < ActiveSupport::TestCase
     assert @user.respond_to?(:password_confirmation)
     assert @user.respond_to?(:authenticate)
     assert @user.respond_to?(:remember_token)
+    assert @user.respond_to?(:confirmation_token)
+    assert @user.respond_to?(:confirm!)
+    assert @user.respond_to?(:skip_confirmation!)
+    assert @user.respond_to?(:confirmed?)
   end
 
   test "valid" do
@@ -84,6 +88,19 @@ class UserTest < ActiveSupport::TestCase
   test "remember token should not be blank" do
     @user.save
     assert_not_equal @user.remember_token, nil
+  end
+
+  test "test confirmation" do
+    @user.save
+    assert_not @user.confirmed?
+    @user.confirm!
+    assert @user.confirmed?
+  end
+
+  test "skip confirmation" do
+    @user.skip_confirmation!
+    @user.save
+    assert @user.confirmed?
   end
 
 end

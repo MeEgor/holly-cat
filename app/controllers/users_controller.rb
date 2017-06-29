@@ -7,10 +7,19 @@ class UsersController < ApplicationController
   def create
     @user = User.new user_params
     if @user.save
-      flash[:success] = "Wellcome to Holly Cat site, #{ @user.email }!"
-      redirect_to root_path
+      UserMailer.confirmation_email(@user).deliver_later
+      flash[:success] = "Confirmation email was sent to #{ @user.email }. Please follow instructions in email."
+      redirect_to signin_path
     else
       render :new
+    end
+  end
+
+  def confirm
+    user = User.find_by confirmation_token: params[:confirmation_token]
+    if user
+      user.confirm!
+      redirect_to signin_path email: user.email
     end
   end
 

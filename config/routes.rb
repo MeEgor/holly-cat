@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:create]
   get 'signup' => 'users#new'
+  get 'confirm/:confirmation_token' => 'users#confirm', as: 'confirm'
 
   resources :sessions, only:[:create]
   get 'signin' => 'sessions#new'

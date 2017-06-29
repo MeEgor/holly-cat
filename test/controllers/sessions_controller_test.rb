@@ -15,7 +15,6 @@ class SessionsControllerTest < ActionController::TestCase
   end
 
   test "get sign in page when already signed in" do
-    @user.save
     sign_in @user
     get :new
     assert_redirected_to root_path
@@ -31,6 +30,7 @@ class SessionsControllerTest < ActionController::TestCase
   end
 
   test "sign in with valid data" do
+    @user.confirm!
     post :create, sessions: {
       email: @user.email,
       password: @user.password
@@ -41,6 +41,15 @@ class SessionsControllerTest < ActionController::TestCase
   test "should get destroy" do
     delete :destroy
     assert_redirected_to signin_path
+  end
+
+  test "sign in not confirmed user" do
+    post :create, sessions: {
+      email: @user.email,
+      password: @user.password
+    }
+    assert_response :success
+    assert_equal "Confirmation is required! Check email #{ @user.email }.", flash[:error]
   end
 
 end

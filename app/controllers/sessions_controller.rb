@@ -6,10 +6,15 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by_email params[:sessions][:email]
-    if user && user.authenticate(params[:sessions][:password])
-      sign_in user
-      redirect_to root_path
+    @user = User.find_by_email params[:sessions][:email]
+    if @user && @user.authenticate(params[:sessions][:password])
+      if @user.confirmed?
+        sign_in @user
+        redirect_to root_path
+      else
+        flash.now[:error] = "Confirmation is required! Check email #{ @user.email }."
+        render :new
+      end
     else
       flash.now[:error] = "Wrong email or password"
       render :new

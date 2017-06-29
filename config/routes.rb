@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get 'signin' => 'sessions#new'
   delete 'signout' => 'sessions#destroy'
 
+  resources :invites, only:[:new, :create, :show, :update]
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170629080737) do
+ActiveRecord::Schema.define(version: 20170629115139) do
+
+  create_table "invites", force: :cascade do |t|
+    t.string   "email"
+    t.string   "invite_token"
+    t.boolean  "active",         default: true
+    t.datetime "last_sent_time"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email"

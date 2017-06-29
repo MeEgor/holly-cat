@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>You was invited to Holy Cat site!</h1>
+    <p>
+      To continue registration follow the link:
+    </p>
+    <p>
+      <%= link_to "accept invite", invite_url(@invite.invite_token) %>
+    </p>
+  </body>
+</html>

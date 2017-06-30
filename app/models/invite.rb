@@ -27,6 +27,10 @@ class Invite < ActiveRecord::Base
     User.new email: email
   end
 
+  def activate!
+    update_attribute active: false
+  end
+
   private
 
     def validate_user_already_exist

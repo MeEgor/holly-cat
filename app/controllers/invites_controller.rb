@@ -32,6 +32,7 @@ class InvitesController < ApplicationController
       @user = User.new user_params
       @user.skip_confirmation! if @user.email == @invite.email
       if @user.save
+        @invite.activate!
         sign_in(@user) if @user.confirmed?
         redirect_to root_path
       else

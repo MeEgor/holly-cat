@@ -36,7 +36,7 @@ class Invite < ActiveRecord::Base
     end
 
     def validate_invite_frequency
-      period = 1.day
+      period = Rails.configuration.invite_frequency
       if last_sent_time && Time.now - last_sent_time < period
         errors[:base] = "Invite already sent. Next try in #{ distance_of_time_in_words(Time.now - last_sent_time, period, include_seconds: true) }"
       end

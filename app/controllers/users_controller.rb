@@ -7,7 +7,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new user_params
     if @user.save
-      UserMailer.confirmation_email(@user).deliver_later
       flash[:success] = "Confirmation email was sent to #{ @user.email }. Please follow instructions in email."
       redirect_to signin_path
     else

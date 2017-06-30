@@ -1,18 +1,15 @@
 <h1 class="content-header">Invite your friend!</h1>
 
-<%= form_for @invite, 
-    url: invites_path, 
-    method: :post, 
-    html: { class: "content-form content-form--new-user-form" }  do |f| %>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <%= bootstrap_form_for @invite, 
+        url: invites_path, 
+        method: :post, 
+        html: { class: "content-form content-form--new-user-form" }  do |f| %>
 
-  <%= render partial: "shared/form_errors", locals: { resource: @invite } %>
-  
-  <div class="content-form-field-wrap">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
+      <%= render partial: "shared/form_errors", locals: { resource: @invite } %>
+      <%= f.text_field :email %>
+      <%= f.submit "Invite friend" %>
+    <% end %>
   </div>
-
-  <div class="content-form-field-wrap">
-    <%= f.submit "Invite friend" %>
-  </div>
-<% end %>
+</div>

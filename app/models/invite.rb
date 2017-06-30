@@ -19,6 +19,10 @@ class Invite < ActiveRecord::Base
     self.invite_token = new_token
   end
 
+  after_save do
+    UserMailer.invite_email(self).deliver_later
+  end
+
   def use
     User.new email: email
   end
@@ -32,7 +36,7 @@ class Invite < ActiveRecord::Base
     end
 
     def validate_invite_frequency
-      period = 1.minutes
+      period = 1.day
       if last_sent_time && Time.now - last_sent_time < period
         errors[:base] = "Invite already sent. Next try in #{ distance_of_time_in_words(Time.now - last_sent_time, period, include_seconds: true) }"
       end

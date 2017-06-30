@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
     self.confirmation_token = new_token unless self.skip_confirmation
   end
 
+  after_create do
+    UserMailer.confirmation_email(self).deliver_later
+  end
+
   attr_accessor :skip_confirmation
 
   def confirmed?

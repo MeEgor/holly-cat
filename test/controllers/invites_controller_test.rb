@@ -1,10 +1,13 @@
 require 'test_helper'
 
 class InvitesControllerTest < ActionController::TestCase
+  include SessionsHelper
 
   def setup
     @user = User.new email: "qwe@wqe.qwe", password: "qweqwe", password_confirmation: "qweqwe"
     @user.skip_confirmation!
+    @user.save
+    sign_in @user
   end
 
   test "should get new" do

@@ -17,7 +17,6 @@ class StaticPagesControllerTest < ActionController::TestCase
     sign_in @user
     get :index
     assert_response :success
-    assert_select "h1.content-header", "Holly Cat!"
     assert_select "img#cat-img"
   end
 

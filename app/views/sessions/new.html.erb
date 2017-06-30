@@ -1,20 +1,18 @@
 <h1 class="content-header">Sign in</h1>
 
-<%= form_for :sessions, 
-    url: sessions_path, 
-    html: { class: "content-form content-form--new-user-form" }  do |f| %>
-  
-  <div class="content-form-field-wrap">
-    <%= f.label :email %>
-    <%= f.text_field :email, value: @email %>
-  </div>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <%= bootstrap_form_for :sessions, 
+      url: sessions_path, 
+      html: { class: "content-form content-form--new-user-form" }  do |f| %>
+    
+      <%= f.text_field :email, value: @email %>
+      <%= f.password_field :password %>
+      <%= f.submit "sign in" %>
+    <% end %>
 
-  <div class="content-form-field-wrap">
-    <%= f.label :password %>
-    <%= f.password_field :password %>
+    <p class="help-block">
+      New user? <%= link_to "Sign up!", signup_path %>
+    </p>
   </div>
-
-  <div class="content-form-field-wrap">
-    <%= f.submit "sign in" %>
-  </div>
-<% end %>
+</div>
